@@ -18,20 +18,42 @@
           <span class="text">{{seller.supports[0].description}}</span>
         </div>
       </div>
-      <div class="support-count" v-if="seller.supports">
+      <div class="support-count" v-if="seller.supports" @click="showDetail">
         <span class="count">{{seller.supports.length}}个</span>
         <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div>
-    <div class="bulletin-wrapper">
+    <div class="bulletin-wrapper" @click="showDetail">
       <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
+    </div>
+    <div class="background">
+      <img :src="seller.avatar" width="100%" height="100%">
+    </div>
+    <div v-show="detailShow" class="detail">
+      <div class="detail-wrapper clearfix"><!-- 这里的clearfix是清除子元素中margin-top所带来的影响，将第一个子元素的margin-top也算作整个父元素中高度的一部分 -->
+        <div class="detail-main">
+        </div>
+      </div>
+      <div class="detail-close">
+        <i class="icon-close"></i>
+      </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   export default {
+    data() {
+      return {
+        detailShow: false
+      }
+    },
+    methods: {
+      showDetail() {
+        this.detailShow = true
+      }
+    },
     props: {
       seller: {
         type: Object
@@ -47,8 +69,10 @@
   @import "../../common/stylus/mixin.styl"
 
   .header
+    position: relative
     color: #fff
-    background: #999
+    background: rgba(7, 17, 27, 0.5)
+    overflow: hidden // 去掉filter模糊后的下部外溢阴影
     .content-wrapper
       position: relative
       padding: 24px 12px 18px 24px
@@ -147,5 +171,32 @@
         font-size: 10px
         right: 12px
         top: 8px
-
+    .background
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      z-index: -1
+      filter: blur(10px)
+    .detail //  Sticky footers http://www.w3cplus.com/css3/css-secrets/sticky-footers.html
+      position: fixed
+      top: 0
+      left: 0
+      z-index: 100
+      width: 100%
+      height: 100%
+      overflow: auto
+      background: rgba(7, 17, 27, 0.8)
+      .detail-wrapper
+        min-height: 100%
+        .detail-main
+          margin-top: 64px
+          padding-bottom: 64px // 为关闭X预留
+      .detail-close
+        position: relative
+        width: 32px
+        height: 32px
+        margin: -64px auto 0
+        font-size: 32px
 </style>
