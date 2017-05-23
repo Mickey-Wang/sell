@@ -33,6 +33,15 @@
     <div v-show="detailShow" class="detail">
       <div class="detail-wrapper clearfix"><!-- 这里的clearfix是清除子元素中margin-top所带来的影响，将第一个子元素的margin-top也算作整个父元素中高度的一部分 -->
         <div class="detail-main">
+          <h1 class="name">{{seller.name}}</h1>
+          <div class="star-wrapper">
+            <star :size="48" :score="seller.score"></star>
+          </div>
+          <div class="title">
+            <div class="line"></div>
+            <div class="text">优惠信息</div>
+            <div class="line"></div>
+          </div>
         </div>
       </div>
       <div class="detail-close">
@@ -43,6 +52,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import Star from '@/components/star/Star'
+
   export default {
     data() {
       return {
@@ -58,6 +69,9 @@
       seller: {
         type: Object
       }
+    },
+    components: {
+      Star
     },
     created() {
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
@@ -130,7 +144,7 @@
         position: absolute
         right: 12px
         bottom: 14px
-        padding: 0px 8px
+        padding: 0 8px
         height: 24px
         line-height: 24px
         border-radius: 14px
@@ -179,7 +193,7 @@
       height: 100%
       z-index: -1
       filter: blur(10px)
-    .detail //  Sticky footers http://www.w3cplus.com/css3/css-secrets/sticky-footers.html
+    .detail
       position: fixed
       top: 0
       left: 0
@@ -188,15 +202,37 @@
       height: 100%
       overflow: auto
       background: rgba(7, 17, 27, 0.8)
-      .detail-wrapper
+      .detail-wrapper//  Sticky footers start; http://www.w3cplus.com/css3/css-secrets/sticky-footers.html关注flex
         min-height: 100%
+        width: 100%
         .detail-main
           margin-top: 64px
           padding-bottom: 64px // 为关闭X预留
+        .name
+          line-height: 16px
+          font-size: 16px
+          font-weight: 700
+          text-align: center
+        .star-wrapper
+          margin-top: 18px
+          padding: 2px 0// 设计稿中高度为48，而星星的高度为40，所以加8px的padding
+          text-align: center
+        .title
+          display: flex// postCss loader扩展CSS hack写法，与caniuse.com同步
+          width: 80%
+          margin: 30px auto 24px
+          .line
+            flex: 1
+            position: relative
+            top: -6px
+            border-bottom: 1px solid rgba(255,255,255,0.2)
+          .text
+            padding: 0 12px
+            font-size: 14px
       .detail-close
         position: relative
         width: 32px
         height: 32px
         margin: -64px auto 0
-        font-size: 32px
+        font-size: 32px// Sticky footers end;
 </style>
