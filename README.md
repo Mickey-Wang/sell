@@ -28,3 +28,28 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## 分支说明
+
+<table>
+    <tr>
+        <td>分支</td>
+        <td>描述</td>
+        <td>功能点/技术点</td>
+    </tr>
+    <tr>
+        <td>wangq1</td>
+        <td>项目准备工作</td>
+        <td>图标字体；mock逻辑；导入素材资源、设计稿等</td>
+    </tr>
+    <tr>
+        <td>wangq2</td>
+        <td>页面骨架开发</td>
+        <td>组件拆分；router；1px边框；加入css reset</td>
+    </tr>
+    <tr>
+        <td>wangq3</td>
+        <td>Header组件的开发</td>
+        <td></td>
+    </tr>
+</table>
