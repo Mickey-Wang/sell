@@ -31,10 +31,6 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ## 分支说明
 
-* wangq1 项目准备工作 图标字体；mock逻辑；导入素材资源、设计稿等
-* wangq2 页面骨架开发 组件拆分；router；1px边框；加入css reset
-* wangq3 Header组件的开发
-
 <table>
     <tr>
         <td>分支</td>
