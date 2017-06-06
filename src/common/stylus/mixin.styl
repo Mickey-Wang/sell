@@ -1,4 +1,8 @@
-boder-1px($color)
+/*
+  :Pseudo-classes         //伪类
+  ::Pseudo-elements       //伪元素
+ */
+border-1px($color)
   position: relative
   &::after
     display: block
@@ -8,6 +12,10 @@ boder-1px($color)
     width: 100%
     border-top 1px solid $color
     content: ' '
+
+border-none()
+  &::after
+    display: none
 
 bg-image($url)
   background-image: url($url + "@2x.png")

@@ -52,7 +52,7 @@
       height: 40px
       line-height: 40px //设计稿中标注的是iPhone6的物理像素，80px，因为iPhone6的dpr是window.devicePixelRatio=2，所以此处写独立像素值40px
       //border-bottom: 1px solid rgba(7, 17, 27, 0.1)
-      boder-1px(rgba(7, 17, 27, 0.1)) // 使用mixin中的函数
+      border-1px(rgba(7, 17, 27, 0.1)) // 使用mixin中的函数
       .tab-item
         flex: auto
         text-align: center
