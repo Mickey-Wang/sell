@@ -52,4 +52,9 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
         <td>Header组件的开发</td>
         <td></td>
     </tr>
+    <tr>
+        <td>wangq4</td>
+        <td>Goods组件的开发</td>
+        <td></td>
+    </tr>
 </table>
