@@ -35,12 +35,14 @@
         </li>
       </ul>
     </div>
+    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 
   import BScroll from 'better-scroll'
+  import Shopcart from '@/components/shopcart/Shopcart'
 
   const ERR_OK = 0
 
@@ -105,6 +107,9 @@
         })
         this.listHeight.unshift(0)
       }
+    },
+    components: {
+      Shopcart
     },
     created() {
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
