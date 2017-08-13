@@ -29,13 +29,16 @@
                   <span class="now">￥{{food.price}}</span><span class="old"
                                                                 v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                 </div>
+                <div class="cartcontrol-wrapper">
+                  <cartcontrol :food="food"></cartcontrol>
+                </div>
               </div>
             </li>
           </ul>
         </li>
       </ul>
     </div>
-    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+    <shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
@@ -43,6 +46,7 @@
 
   import BScroll from 'better-scroll'
   import Shopcart from '@/components/shopcart/Shopcart'
+  import Cartcontrol from '@/components/cartcontrol/Cartcontrol'
 
   const ERR_OK = 0
 
@@ -71,6 +75,21 @@
             return i
           }
         }
+        return 0
+      },
+      /**
+       * 当子组件cartcontrol改变food的值时，即goods发生改变，触发selectFoods计算属性
+       */
+      selectFoods() {
+        let foods = []
+        this.goods.forEach((good) => {
+          good.foods.forEach((food) => {
+            if (food.count) {
+              foods.push(food)
+            }
+          })
+        })
+        return foods
       }
     },
     methods: {
@@ -86,6 +105,7 @@
           click: true // 在移动设备中，betterScroll会把点击preventDefault（在PC中点击列表时可以触发默认点击行为，而在手机中阻止点击默认行为，所以这里相当于显示的声明告知BS，需要派发一个自定义点击事件）
         })
         this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
+          click: true,
           probeType: 3
         })
         this.foodsScroll.on('scroll', (pos) => {
@@ -109,7 +129,8 @@
       }
     },
     components: {
-      Shopcart
+      Shopcart,
+      Cartcontrol
     },
     created() {
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
@@ -220,7 +241,7 @@
               margin-right: 12px
           .price
             font-weight: 700
-            line-height：24px
+            line-height: 24px
             .now
               margin-right: 8px
               font-size: 14px
@@ -229,4 +250,8 @@
               text-decoration: line-through
               font-size: 10px
               color: rgb(147, 153, 159)
+          .cartcontrol-wrapper
+            position: absolute
+            right: 0
+            bottom: 12px
 </style>
