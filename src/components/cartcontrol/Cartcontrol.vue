@@ -1,8 +1,12 @@
 <template>
   <div class="cartcontrol">
-    <div class="cart-decrease" v-show="food.count>0" @click="decreaseCart" transition="move">
-      <span class="inner icon-remove_circle_outline"></span>
-    </div>
+
+      <div class="cart-decrease" @click="decreaseCart">
+        <transition name="move">
+          <span class="inner icon-remove_circle_outline" v-show="food.count>0"></span>
+        </transition>
+      </div>
+
     <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
     <div class="cart-add icon-add_circle" @click="addCart"></div>
   </div>
@@ -47,22 +51,17 @@
     .cart-decrease
       display: inline-block
       padding: 6px// 为了使得点击区域更大，而且不影响样式展示，所以加一个padding
-      transition: all 0.4s linear
-      &.move-transition
-        opacity: 1
-        transform: translate3d(0, 0, 0)
-        .inner
-          display: inline-block
-          line-height: 24px
-          font-size: 24px
-          color: rgb(0, 160, 220)
-          transition: all 0.4s linear
-          transform: rotate(0)
-      &.move-enter, &.move-leave
-        opacity: 0
-        transform: translate3d(24px, 0, 0) // 加速动画的流畅效果
-        .inner
-          transform: rotate(180deg)
+      .inner
+        display: inline-block
+        line-height: 24px
+        font-size: 24px
+        color: rgb(0, 160, 220)
+    .move-enter-active, .move-leave-active
+      transition: transform 1s linear
+    .move-enter-to, .move-leave
+      transform: translate3d(0px, 0, 0) scale(1) rotate(0deg) // 注意书写顺序
+    .move-enter, .move-leave-to
+      transform: translate3d(36px, 0, 0) scale(0) rotate(180deg)
     .cart-count
       display: inline-block
       vertical-align: top
