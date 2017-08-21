@@ -1,11 +1,11 @@
 <template>
   <div class="cartcontrol">
 
-      <div class="cart-decrease" @click="decreaseCart">
-        <transition name="move">
-          <span class="inner icon-remove_circle_outline" v-show="food.count>0"></span>
-        </transition>
+    <transition name="move">
+      <div class="cart-decrease" @click="decreaseCart" v-show="food.count>0">
+          <span class="inner icon-remove_circle_outline"></span>
       </div>
+    </transition>
 
     <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
     <div class="cart-add icon-add_circle" @click="addCart"></div>
@@ -51,17 +51,37 @@
     .cart-decrease
       display: inline-block
       padding: 6px// 为了使得点击区域更大，而且不影响样式展示，所以加一个padding
+      opacity: 1
+      transform: translate3d(0, 0, 0)
       .inner
         display: inline-block
         line-height: 24px
         font-size: 24px
         color: rgb(0, 160, 220)
-    .move-enter-active, .move-leave-active
-      transition: transform 1s linear
-    .move-enter-to, .move-leave
-      transform: translate3d(0px, 0, 0) scale(1) rotate(0deg) // 注意书写顺序
-    .move-enter, .move-leave-to
-      transform: translate3d(36px, 0, 0) scale(0) rotate(180deg)
+        transition: all 0.4s linear
+        transform: rotate(0)
+      &.move-enter-active, &.move-leave-active
+        transition: all 0.4s linear
+      &.move-enter, &.move-leave-to
+        opacity: 0
+        transform: translate3d(24px, 0, 0)
+        .inner
+          transform: rotate(180deg)// 注意此处子节点的动画写法
+    /* 此种写法动画有问题，特别卡慢，可能是transform多效果原因
+    .cart-decrease
+      display: inline-block
+      padding: 6px
+      .inner
+        display: inline-block
+        line-height: 24px
+        font-size: 24px
+        color: rgb(0, 160, 220)
+      .move-enter-active, .move-leave-active
+        transition: transform 1s linear
+      .move-enter-to, .move-leave
+        transform: translate3d(0px, 0, 0) scale(1) rotate(0deg) // 注意书写顺序
+      .move-enter, .move-leave-to
+        transform: translate3d(36px, 0, 0) scale(0) rotate(180deg)*/
     .cart-count
       display: inline-block
       vertical-align: top
